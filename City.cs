@@ -2,16 +2,17 @@ using System;
 using System.Collections.Immutable;
 using System.Collections.Generic;
 
+// Contains essential information about cities along the route.
 class City
 {
-    public readonly int id;
-    public readonly string name;
-    public readonly ImmutableArray<double> edges;
+    // The number of cities being considered.
+    public static int Count;
+    
+    public static ImmutableArray<City> ListOf;
 
-    public static City[] GetList()
+    static City()
     {
-        // Number of cities.
-        int n = 10;
+        Count = 10;
 
         string[] names = {
             "Sydney",
@@ -41,13 +42,13 @@ class City
         };
 
         // Table of distances between each pair of cities.
-        double[][] distances = new double[n][];
+        double[][] distances = new double[Count][];
 
-        for(int i = 0; i < n; i++) {
-            distances[i] = new double[n];
+        for(int i = 0; i < Count; i++) {
+            distances[i] = new double[Count];
         }
 
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < Count; i++)
         {
             for(int j = 0; j < i; j++)
             {
@@ -59,22 +60,23 @@ class City
             }
         }
 
-        City[] Cities = new City[n];
+        City[] Cities = new City[Count];
 
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < Count; i++)
         {
-            // Turn the array into a list so I can delete an element from it.
-            // Not an elegant solution, there's probably a better way to remove said element or prevent its existence in the first place.
-            List<double> edges = new List<double>(distances[i]);
-            // The City doesn't need to store an edge to itself.
-            edges.RemoveAt(i);
-            Cities[i] = new City(i, names[i], edges);
+            Cities[i] = new City(i, names[i], distances[i]);
         }
 
-        return Cities;
+        ListOf = ImmutableArray.CreateRange(Cities);
     }
 
-    private City(int i, string n, IEnumerable<double> e)
+    public readonly int id;
+    public readonly string name;
+    // Distances from this city to each other city.
+    // Array indices match the id of each city.
+    public readonly ImmutableArray<double> edges;
+
+    private City(int i, string n, double[] e)
     {
         id = i;
         name = n;
