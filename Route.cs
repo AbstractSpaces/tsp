@@ -33,7 +33,8 @@ class Route
     }
 
     // Create a new route by swapping two cities in the order of this Route.
-    public Route SwapOrder(int indexA, int indexB)
+    public Route SwapOrder
+    (int indexA, int indexB)
     {
         int[] swapped = new int[order.Length];
         order.CopyTo(swapped);

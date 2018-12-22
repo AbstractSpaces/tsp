@@ -6,7 +6,7 @@ namespace tsp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            City.PrintEdges();
         }
     }
 }

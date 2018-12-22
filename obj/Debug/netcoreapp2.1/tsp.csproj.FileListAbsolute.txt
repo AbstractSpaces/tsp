@@ -1,0 +1,11 @@
+C:\Users\dylan\Github\tsp\bin\Debug\netcoreapp2.1\tsp.deps.json
+C:\Users\dylan\Github\tsp\bin\Debug\netcoreapp2.1\tsp.runtimeconfig.json
+C:\Users\dylan\Github\tsp\bin\Debug\netcoreapp2.1\tsp.runtimeconfig.dev.json
+C:\Users\dylan\Github\tsp\bin\Debug\netcoreapp2.1\tsp.dll
+C:\Users\dylan\Github\tsp\bin\Debug\netcoreapp2.1\tsp.pdb
+C:\Users\dylan\Github\tsp\obj\Debug\netcoreapp2.1\tsp.csprojAssemblyReference.cache
+C:\Users\dylan\Github\tsp\obj\Debug\netcoreapp2.1\tsp.csproj.CoreCompileInputs.cache
+C:\Users\dylan\Github\tsp\obj\Debug\netcoreapp2.1\tsp.AssemblyInfoInputs.cache
+C:\Users\dylan\Github\tsp\obj\Debug\netcoreapp2.1\tsp.AssemblyInfo.cs
+C:\Users\dylan\Github\tsp\obj\Debug\netcoreapp2.1\tsp.dll
+C:\Users\dylan\Github\tsp\obj\Debug\netcoreapp2.1\tsp.pdb

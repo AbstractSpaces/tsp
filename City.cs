@@ -14,7 +14,7 @@ class City
     {
         Count = 10;
 
-        string[] names = {
+        String[] names = {
             "Sydney",
             "Melbourne",
             "Brisbane",
@@ -70,13 +70,37 @@ class City
         ListOf = Cities.ToImmutableArray();
     }
 
+    public static void PrintEdges()
+    {
+        String header = "\t\t      0";
+
+        for(int i = 1; i < ListOf.Length; i++)
+        {
+            header += String.Format("\t\t      {0}", i);
+        }
+
+        Console.WriteLine(header);
+
+        foreach(City c in ListOf)
+        {
+            Console.Write(c.id.ToString());
+            
+            foreach(double e in c.edges)
+            {
+                Console.Write("\t\t{0:00.0000}", e);
+            }
+
+            Console.Write("\n");
+        }
+    }
+
     public readonly int id;
-    public readonly string name;
+    public readonly String name;
     // Distances from this city to each other city.
     // Array indices match the id of each city.
     public readonly ImmutableArray<double> edges;
 
-    private City(int i, string n, double[] e)
+    private City(int i, String n, double[] e)
     {
         id = i;
         name = n;
