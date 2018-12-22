@@ -67,7 +67,7 @@ class City
             Cities[i] = new City(i, names[i], distances[i]);
         }
 
-        ListOf = ImmutableArray.CreateRange(Cities);
+        ListOf = Cities.ToImmutableArray();
     }
 
     public readonly int id;
@@ -80,6 +80,6 @@ class City
     {
         id = i;
         name = n;
-        edges = ImmutableArray.CreateRange(e);
+        edges = e.ToImmutableArray();
     }
 }

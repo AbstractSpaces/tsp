@@ -15,7 +15,7 @@ class Route
     // But I refuse to use try-catch every time I call the constructor.
     public Route(int[] o)
     {
-        order = ImmutableArray.CreateRange(o);
+        order = o.ToImmutableArray();
 
         double l = 0.0;
 
@@ -30,5 +30,16 @@ class Route
         City last = City.ListOf[order[order.Length-1]];
         l += last.edges[order[0]];
         length = l;
+    }
+
+    // Create a new route by swapping two cities in the order of this Route.
+    public Route SwapOrder(int indexA, int indexB)
+    {
+        int[] swapped = new int[order.Length];
+        order.CopyTo(swapped);
+        int temp = swapped[indexA];
+        swapped[indexA] = swapped[indexB];
+        swapped[indexB] = temp;
+        return new Route(swapped);
     }
 }
