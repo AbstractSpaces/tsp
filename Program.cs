@@ -6,7 +6,10 @@ namespace tsp
     {
         static void Main(string[] args)
         {
-            City.PrintEdges();
+            for(int i = 0; i < 10; i++)
+            {
+                new Route().Print();
+            }
         }
     }
 }
