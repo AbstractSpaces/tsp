@@ -4,7 +4,7 @@ namespace tsp
 {
     class Greedy : Algorithm
     {
-        public Greedy(int l) : base(l)
+        public Greedy(int l) : base("Greedy", l)
         { }
 
         override public bool Step()

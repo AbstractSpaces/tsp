@@ -21,7 +21,7 @@ namespace tsp
             List<int> cities = new List<int>(Enumerable.Range(0, City.Count));
 
             List<int> o = new List<int>();
-            Random rand = new Random();
+            System.Random rand = new System.Random();
 
             while(cities.Count > 0)
             {
