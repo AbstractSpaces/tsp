@@ -7,18 +7,6 @@ namespace tsp
     {
         private static int trials = 10;
 
-        private static String help =
-            @"TSP Help:
-            To run the program enter:
-                dotnet tsp LIMIT [ALGORITHM]
-
-            LIMIT determines how many iterations the algorithm(s) will be allowed to run. It must be a positive integer.
-            [ALGORITHM] is the name of the algorithm to use. Valid names are:
-                random
-                greedy
-            Alternatively if no algorithm argument is given, all available algorithms will be run and compared against each other.
-            ";
-
         private static Algorithm[] ChooseAlgorithms(String choice, int limit)
         {
             if(choice == null)
@@ -65,7 +53,11 @@ namespace tsp
             }
 
             // Uh oh, try again.
-            Console.Write(help);
+            Console.WriteLine("TSP Help:");
+            Console.WriteLine("To run the program enter: dotnet run ./tsp LIMIT [ALGORITHM]");
+            Console.WriteLine("LIMIT determines how many iterations the algorithm(s) will be allowed to run. It must be a positive integer.");
+            Console.WriteLine("[ALGORITHM] is the name of the algorithm to use. Valid names are:\n\trandom\n\tgreedy");
+            Console.WriteLine("Alternatively if no algorithm argument is given, all available algorithms will be run and compared against each other.");
         }
     }
 }
