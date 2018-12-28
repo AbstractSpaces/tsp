@@ -35,12 +35,19 @@ namespace tsp
         }
 
         // Create a Route using a specified order.
-        // It'd be real nice if I could just require a certain length array in the parameter list.
-        // But I refuse to use try-catch every time I call the constructor.
         public Route(int[] o)
         {
             order = o.ToImmutableArray();
             length = CalcLength();
+        }
+
+        // Create a Route by adding a City to an existing route.
+        public Route AddCity(City c)
+        {
+            int[] newOrder = new int[order.Length + 1];
+            order.CopyTo(newOrder);
+            newOrder[order.Length] = c.id;
+            return new Route(newOrder);
         }
 
         // Create a new route by swapping two cities in the order of this Route.
