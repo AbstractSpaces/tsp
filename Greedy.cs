@@ -2,12 +2,19 @@ using System.Collections.Generic;
 
 namespace tsp
 {
+    // This algorithms starts with a random Route, and repeatedly performs the swap that reduces Route length the most.
     class Greedy : Algorithm
     {
-        public Greedy(int l) : base("Greedy", l)
+        public Greedy() : base("Greedy")
         { }
 
-        override public bool Step()
+        override public Route Run()
+        {
+            while(!Step());
+            return best;
+        }
+
+        private bool Step()
         {
             List<Route> n = last.Neighbours();
             Route selected = last;

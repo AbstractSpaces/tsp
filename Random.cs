@@ -1,14 +1,15 @@
 namespace tsp
 {
+    // This simply chooses a random route.
+    // Its performance is the baseline against which other algorithms can be compared.
     class Random : Algorithm
     {
-        public Random() : base("Random", 1)
+        public Random() : base("Random")
         { }
 
-        override public bool Step()
+        override public Route Run()
         {
-            best = new Route();
-            return true;
+            return new Route();
         }
     }
 }

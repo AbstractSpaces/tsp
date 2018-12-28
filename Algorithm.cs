@@ -5,28 +5,22 @@ namespace tsp
     abstract class Algorithm
     {
         public readonly String name;
-        protected int limit;
         protected Route best;
         protected Route last;
 
-        public Algorithm(String n, int l)
+        public Algorithm(String n)
         {
             name = n;
-            limit = l;
             best = new Route();
             last = best;
         }
+
+        abstract public Route Run();
 
         public void Reset()
         {
             best = new Route();
             last = best;
-        }
-
-        public Route Run()
-        {
-            for(int i = 0; i < limit && !Step(); i++);
-            return best;
         }
 
         // Run the algorithm a specified number of times, returning the shortest route length found and the average.
@@ -45,8 +39,5 @@ namespace tsp
 
             return new double[] {shortest, total / (double) t};
         }
-
-        // Returns true if this is to be the final iteration.
-        abstract public bool Step();
     }
 }

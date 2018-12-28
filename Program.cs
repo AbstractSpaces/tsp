@@ -7,14 +7,14 @@ namespace tsp
     {
         private static int trials = 10;
 
-        private static Algorithm[] ChooseAlgorithms(String choice, int limit)
+        private static Algorithm[] ChooseAlgorithms(String choice)
         {
             if(choice == null)
             {
                 return new Algorithm []
                 {
                     new Random(),
-                    new Greedy(limit)
+                    new Greedy()
                 };
             }
             else if(choice == "random")
@@ -23,7 +23,7 @@ namespace tsp
             }
             else if(choice == "greedy")
             {
-                return new Algorithm [] { new Greedy(limit) };
+                return new Algorithm [] { new Greedy() };
             }
 
             return null;
@@ -31,31 +31,26 @@ namespace tsp
 
         static void Main(string[] args)
         {
-            int limit;
+            String choice = args.Length > 1 ? args[2] : null;
+            Algorithm[] toRun = ChooseAlgorithms(choice);
 
-            if(args.Length >= 2 && Int32.TryParse(args[1], out limit))
+            if(toRun != null)
             {
-                String choice = args.Length > 2 ? args[2] : null;
-                Algorithm[] toRun = ChooseAlgorithms(choice, limit);
+                Console.WriteLine("Results:");
+                Console.WriteLine("\tName\tBest\tAverage");
 
-                if(toRun != null)
+                foreach(Algorithm a in toRun)
                 {
-                    Console.WriteLine("Results:");
-                    Console.WriteLine("\tName\tBest\tAverage");
-
-                    foreach(Algorithm a in toRun)
-                    {
-                        double[] result = a.RunTrials(trials);
-                        Console.WriteLine("\t{0}\t{1:00.000}\t{2:00.000}", a.name, result[0], result[1]);
-                    }
-                    return;
+                    double[] result = a.RunTrials(trials);
+                    Console.WriteLine("\t{0}\t{1:00.000}\t{2:00.000}", a.name, result[0], result[1]);
                 }
+                
+                return;
             }
 
             // Uh oh, try again.
             Console.WriteLine("TSP Help:");
-            Console.WriteLine("To run the program enter: dotnet run ./tsp LIMIT [ALGORITHM]");
-            Console.WriteLine("LIMIT determines how many iterations the algorithm(s) will be allowed to run. It must be a positive integer.");
+            Console.WriteLine("To run the program enter: dotnet run ./tsp [ALGORITHM]");
             Console.WriteLine("[ALGORITHM] is the name of the algorithm to use. Valid names are:\n\trandom\n\tgreedy");
             Console.WriteLine("Alternatively if no algorithm argument is given, all available algorithms will be run and compared against each other.");
         }
