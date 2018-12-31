@@ -2,7 +2,7 @@ using System;
 using System.Collections.Immutable;
 using System.Collections.Generic;
 
-namespace tsp
+namespace TSP
 {
     // Contains essential information about cities along the route.
     class City
@@ -85,9 +85,9 @@ namespace tsp
 
             foreach(City c in ListOf)
             {
-                Console.Write(c.id.ToString());
+                Console.Write(c.ID.ToString());
                 
-                foreach(double e in c.edges)
+                foreach(double e in c.Edges)
                 {
                     Console.Write("\t\t{0:00.0000}", e);
                 }
@@ -96,17 +96,17 @@ namespace tsp
             }
         }
 
-        public readonly int id;
-        public readonly String name;
+        public readonly int ID;
+        public readonly String Name;
         // Distances from this city to each other city.
         // Array indices match the id of each city.
-        public readonly ImmutableArray<double> edges;
+        public readonly ImmutableArray<double> Edges;
 
         private City(int i, String n, double[] e)
         {
-            id = i;
-            name = n;
-            edges = e.ToImmutableArray();
+            ID = i;
+            Name = n;
+            Edges = e.ToImmutableArray();
         }
     }
 }

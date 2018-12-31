@@ -3,59 +3,59 @@ using System.Linq;
 using System.Collections.Immutable;
 using System.Collections.Generic;
 
-namespace tsp
+namespace TSP
 {
     // Represents a solution to the Travelling Salesman Problem.
     // Will be immutable until I find reason to do otherwise.
     class Route
     {
         // Lists City ids in the order visited.
-        public readonly ImmutableArray<int> order;
+        public readonly ImmutableArray<City> Order;
         // Summed distance of the route from start back to start.
-        public readonly double length;
+        public readonly double Length;
 
         // Create a randomised Route.
         public Route()
         {
             // Get a list of City ids.
-            List<int> cities = new List<int>(Enumerable.Range(0, City.Count));
+            List<int> id = new List<int>(Enumerable.Range(0, City.Count));
 
-            List<int> o = new List<int>();
+            List<City> o = new List<City>();
             System.Random rand = new System.Random();
 
-            while(cities.Count > 0)
+            while(id.Count > 0)
             {
-                int i = rand.Next(cities.Count);
-                o.Add(cities[i]);
-                cities.RemoveAt(i);
+                int i = rand.Next(id.Count);
+                o.Add(City.ListOf[id[i]]);
+                id.RemoveAt(i);
             }
 
-            order = o.ToImmutableArray();
-            length = CalcLength();
+            Order = o.ToImmutableArray();
+            Length = CalcLength();
         }
 
         // Create a Route using a specified order.
-        public Route(int[] o)
+        public Route(City[] o)
         {
-            order = o.ToImmutableArray();
-            length = CalcLength();
+            Order = o.ToImmutableArray();
+            Length = CalcLength();
         }
 
         // Create a Route by adding a City to an existing route.
         public Route AddCity(City c)
         {
-            int[] newOrder = new int[order.Length + 1];
-            order.CopyTo(newOrder);
-            newOrder[order.Length] = c.id;
+            City[] newOrder = new City[Order.Length + 1];
+            Order.CopyTo(newOrder);
+            newOrder[Order.Length] = c;
             return new Route(newOrder);
         }
 
         // Create a new route by swapping two cities in the order of this Route.
         public Route SwapOrder(int indexA, int indexB)
         {
-            int[] swapped = new int[order.Length];
-            order.CopyTo(swapped);
-            int temp = swapped[indexA];
+            City[] swapped = new City[Order.Length];
+            Order.CopyTo(swapped);
+            City temp = swapped[indexA];
             swapped[indexA] = swapped[indexB];
             swapped[indexB] = temp;
             return new Route(swapped);
@@ -66,9 +66,9 @@ namespace tsp
         {
             List<Route> n = new List<Route>();
 
-            for(int i = 0; i < order.Length - 1; i++)
+            for(int i = 0; i < Order.Length - 1; i++)
             {
-                for(int j = i + 1; j < order.Length; j++)
+                for(int j = i + 1; j < Order.Length; j++)
                 {
                     n.Add(SwapOrder(i, j));
                 }
@@ -80,27 +80,27 @@ namespace tsp
         public void Print()
         {
             Console.Write("Route: ");
-            foreach(int i in order)
+            foreach(City i in Order)
             {
-                Console.Write(String.Format("{0} ", i));
+                Console.Write(String.Format("{0} ", i.Name));
             }
-            Console.WriteLine(String.Format("\nLength: {0}\n", length));
+            Console.WriteLine(String.Format("\nLength: {0}\n", Length));
         }
 
         private double CalcLength()
         {
             double l = 0.0;
 
-            for(int i = 0; i < order.Length-1; i++)
+            for(int i = 0; i < Order.Length-1; i++)
             {
                 // Could've done this on one line, chose not to for readability.
-                City from = City.ListOf[order[i]];
-                double edge = from.edges[order[i+1]];
+                City from = Order[i];
+                double edge = from.Edges[Order[i+1].ID];
                 l += edge;
             }
 
-            City last = City.ListOf[order[order.Length-1]];
-            l += last.edges[order[0]];
+            City last = Order[Order.Length-1];
+            l += last.Edges[Order[0].ID];
             return l;
         }
     }

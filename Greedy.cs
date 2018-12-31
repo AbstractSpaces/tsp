@@ -1,41 +1,47 @@
 using System.Collections.Generic;
 
-namespace tsp
+namespace TSP
 {
     // This algorithms starts with a random Route, and repeatedly performs the swap that reduces Route length the most.
+    // It treats the problem as a graph search where nodes are neighboured by routes differing by one swap.
     class Greedy : Algorithm
     {
+        private Route Current;
+
         public Greedy() : base("Greedy")
         { }
 
-        override public Route Run()
+        override public void Reset()
         {
-            while(!Step());
-            return best;
+            Current = new Route();
         }
 
-        private bool Step()
+        override public Route Run()
         {
-            List<Route> n = last.Neighbours();
-            Route selected = last;
-
-            foreach(Route i in n)
+            while(true)
             {
-                if(i.length < selected.length)
+                List<Route> n = Current.Neighbours();
+                Route bestNeighbour = n[0];
+
+                foreach(Route r in n)
                 {
-                    selected = i;
+                    if(r.Length < bestNeighbour.Length)
+                    {
+                        bestNeighbour = r;
+                    }
+                }
+
+                if(bestNeighbour.Length < Current.Length)
+                {
+                    Current = bestNeighbour;
+                }
+                else
+                {
+                    break;
                 }
             }
 
-            if(selected.length >= best.length)
-            {
-                return true;
-            }
-            else
-            {
-                best = selected;
-                return false;
-            }
+            return Current; 
         }
     }
 }

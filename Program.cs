@@ -1,11 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace tsp
+namespace TSP
 {
     class Program
     {
-        private static int trials = 10;
+        private static readonly int trials = 10;
+
+        // Run an algorithm a specified number of times, returning the shortest route length found and the average.
+        public static double[] RunTrials(Algorithm toRun)
+        {
+            double shortest = double.PositiveInfinity;
+            double total = 0.0;
+
+            for(int i = 0; i < trials; i++)
+            {
+                toRun.Reset();
+                Route result = toRun.Run();
+                shortest = result.Length < shortest ? result.Length : shortest;
+                total += result.Length;
+            }
+
+            return new double[] {shortest, total / (double) trials};
+        }
 
         private static Algorithm[] ChooseAlgorithms(String choice)
         {
@@ -41,8 +58,8 @@ namespace tsp
 
                 foreach(Algorithm a in toRun)
                 {
-                    double[] result = a.RunTrials(trials);
-                    Console.WriteLine("\t{0}\t{1:00.000}\t{2:00.000}", a.name, result[0], result[1]);
+                    double[] result = RunTrials(a);
+                    Console.WriteLine("\t{0}\t{1:00.000}\t{2:00.000}", a.Name, result[0], result[1]);
                 }
                 
                 return;
