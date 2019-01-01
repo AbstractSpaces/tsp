@@ -1,9 +1,5 @@
 # TODO
 
-Finish Tree class.
-Rewrite MST to use Tree class.
-
-MST
 Simulated annealing
 Tabu
 2-Opt

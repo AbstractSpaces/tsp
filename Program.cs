@@ -5,7 +5,7 @@ namespace TSP
 {
     class Program
     {
-        private static readonly int trials = 10;
+        private static readonly int trials = 100;
 
         // Run an algorithm a specified number of times, returning the shortest route length found and the average.
         public static double[] RunTrials(Algorithm toRun)
@@ -31,7 +31,8 @@ namespace TSP
                 return new Algorithm []
                 {
                     new Random(),
-                    new Greedy()
+                    new Greedy(),
+                    new MST()
                 };
             }
             else if(choice == "random")
@@ -42,13 +43,17 @@ namespace TSP
             {
                 return new Algorithm [] { new Greedy() };
             }
+            else if(choice == "mst")
+            {
+                return new Algorithm[] { new MST() };
+            }
 
             return null;
         }
 
         static void Main(string[] args)
         {
-            String choice = args.Length > 1 ? args[2] : null;
+            String choice = args.Length > 1 ? args[1] : null;
             Algorithm[] toRun = ChooseAlgorithms(choice);
 
             if(toRun != null)
@@ -68,7 +73,7 @@ namespace TSP
             // Uh oh, try again.
             Console.WriteLine("TSP Help:");
             Console.WriteLine("To run the program enter: dotnet run ./tsp [ALGORITHM]");
-            Console.WriteLine("[ALGORITHM] is the name of the algorithm to use. Valid names are:\n\trandom\n\tgreedy");
+            Console.WriteLine("[ALGORITHM] is the name of the algorithm to use. Valid names are:\n\trandom\n\tgreedy\n\tmst");
             Console.WriteLine("Alternatively if no algorithm argument is given, all available algorithms will be run and compared against each other.");
         }
     }
