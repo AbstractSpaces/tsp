@@ -5,39 +5,41 @@ namespace TSP
     // This algorithm builds a minimum spanning tree of the graph of cities.
     // It then performs a depth first search on the tree and uses the order of traversal to build the route.
     // This guarantees a solution no more than twice the length of the optimal one.
+    // There's a lot of side effects in use here that I'm not proud of, I'd prefer a stateless architecture for these algorithms but I'm kind of committed at this point.
     class MST : Algorithm
     {
-        // The spanning tree is represented by this array.
-        // Each index corresponds to the city with that index as its ID.
-        // The value of each element is the index/ID of that City's parent node, with the root node labelled with -1 as parent.
-        private List<int> Tree;
-
+        private CityTree Tree;
+        private bool[] Visited;
+        private List<City> Result;
         public MST() : base("MST")
         { }
 
         override public void Reset()
         {
-            Tree = new List<int>(City.Count);
+            Tree = null;
+            Visited = new bool[City.Count];
+            Result = new List<City>();
         }
 
         override public Route Run()
         {
             BuildTree();
-            return SearchTree();
+            DFS(Tree.Root);
+            return new Route(Result.ToArray());
         }
         
         // Using Prim's algorithm, build a minimum spanning tree of the graph of Cities.
         private void BuildTree()
         {
             // Select a random City to be the tree's root node.
-            int root = new System.Random().Next(City.Count);
-            Tree[root] = -1;
+            City root = City.ListOf[new System.Random().Next(City.Count)];
+            Tree = new CityTree(root);
 
             List<City> onTree = new List<City>();
-            onTree.Add(City.ListOf[root]);
+            onTree.Add(root);
 
             List<City> offTree = new List<City>(City.ListOf);
-            offTree.RemoveAt(root);
+            offTree.Remove(root);
 
             // Begin Prim's algorithm.
             while(onTree.Count < City.Count)
@@ -57,16 +59,24 @@ namespace TSP
                     }
                 }
 
-                Tree[to.ID] = from.ID;
+                Tree.Insert(to, from);
                 onTree.Add(to);
                 offTree.Remove(to);
             }
         }
 
-        private Route SearchTree()
+        private void DFS(City node)
         {
-            List<City> r = new List<City>();
-            
+            Visited[node.ID] = true;
+            Result.Add(node);
+
+            foreach(City c in Tree.Children(node))
+            {
+                if(!Visited[c.ID])
+                {
+                    DFS(c);
+                }
+            }
         }
     }
 }
