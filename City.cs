@@ -14,7 +14,7 @@ namespace TSP
 
         static City()
         {
-            Count = 10;
+            Count = 20;
 
             String[] names = {
                 "Sydney",
@@ -26,7 +26,17 @@ namespace TSP
                 "Newcastle",
                 "Canberra",
                 "Sunshine Coast",
-                "Wollongong"
+                "Wollongong",
+                "Geelong",
+                "Hobart",
+                "Townsville",
+                "Cairns",
+                "Darwin",
+                "Toowoomba",
+                "Ballarat",
+                "Bendigo",
+                "Albury",
+                "Launceston"
             };
 
             // Coordinates are listed as degrees (South, East).
@@ -40,7 +50,17 @@ namespace TSP
                 {32.916667, 151.75},
                 {35.3075, 149.124444},
                 {26.65, 153.066667},
-                {34.433056, 150.883056}
+                {34.433056, 150.883056},
+                {38.15, 144.35},
+                {42.88055556, 147.325},
+                {19.25638889, 146.81833333},
+                {16.93027778, 145.77027778},
+                {12.43805556, 130.84111111},
+                {27.56666667, 151.95},
+                {37.55, 143.85},
+                {36.75, 144.26666667},
+                {36.08055556, 146.91583333},
+                {41.44194444, 147.145}
             };
 
             // Table of distances between each pair of cities.
