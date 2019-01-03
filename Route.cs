@@ -44,9 +44,15 @@ namespace TSP
         // Create a Route by adding a City to an existing route, at the specified position.
         public Route Insert(City city, int position)
         {
+            if(position > Order.Length)
+            {
+                Console.WriteLine("Can't insert City at index {0}. Defaulting to end of array.", position);
+                position = Order.Length;
+            }
             City[] newOrder = new City[Order.Length + 1];
-            Order.CopyTo(newOrder);
-            newOrder[Order.Length] = city;
+            Order.CopyTo(0, newOrder, 0, position);
+            newOrder[position] = city;
+            Order.CopyTo(position, newOrder, position + 1, Order.Length - position);
             return new Route(newOrder);
         }
 
