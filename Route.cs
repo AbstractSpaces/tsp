@@ -41,12 +41,12 @@ namespace TSP
             Length = CalcLength();
         }
 
-        // Create a Route by adding a City to an existing route.
-        public Route AddCity(City c)
+        // Create a Route by adding a City to an existing route, at the specified position.
+        public Route Insert(City city, int position)
         {
             City[] newOrder = new City[Order.Length + 1];
             Order.CopyTo(newOrder);
-            newOrder[Order.Length] = c;
+            newOrder[Order.Length] = city;
             return new Route(newOrder);
         }
 

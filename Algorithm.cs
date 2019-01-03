@@ -6,9 +6,9 @@ namespace TSP
     {
         public readonly string Name;
 
-        public Algorithm(string n)
+        public Algorithm(string name)
         {
-            Name = n;
+            Name = name;
             Reset();
         }
 

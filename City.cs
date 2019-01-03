@@ -12,6 +12,12 @@ namespace TSP
         
         public static ImmutableArray<City> ListOf;
 
+        public readonly int ID;
+        public readonly String Name;
+        // Distances from this city to each other city.
+        // Array indices match the id of each city.
+        public readonly ImmutableArray<double> Edges;
+
         static City()
         {
             Count = 20;
@@ -115,12 +121,6 @@ namespace TSP
                 Console.Write("\n");
             }
         }
-
-        public readonly int ID;
-        public readonly String Name;
-        // Distances from this city to each other city.
-        // Array indices match the id of each city.
-        public readonly ImmutableArray<double> Edges;
 
         private City(int i, String n, double[] e)
         {

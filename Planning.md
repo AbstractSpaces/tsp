@@ -2,7 +2,6 @@
 
 Simulated annealing
 Tabu
-2-Opt
 
 # Models
 

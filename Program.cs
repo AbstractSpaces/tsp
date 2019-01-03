@@ -47,8 +47,10 @@ namespace TSP
             {
                 return new Algorithm[] { new MST() };
             }
-
-            return null;
+            else
+            {
+                return null;
+            }
         }
 
         static void Main(string[] args)
