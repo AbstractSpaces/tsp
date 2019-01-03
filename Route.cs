@@ -89,9 +89,10 @@ namespace TSP
             Console.Write("Route: ");
             foreach(City i in Order)
             {
-                Console.Write(String.Format("{0} ", i.Name));
+                Console.Write($"{i.Name} ");
             }
-            Console.WriteLine(String.Format("\nLength: {0}\n", Length));
+            Console.Write($"{Order[0].Name}");
+            Console.WriteLine($"\nLength: {Length}\n");
         }
 
         private double CalcLength()

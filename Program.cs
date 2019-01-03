@@ -84,23 +84,33 @@ namespace TSP
 
             if(toRun != null)
             {
-                Console.WriteLine("Results:");
-                Console.WriteLine("\tName\tBest\tAverage");
-
-                foreach(Algorithm a in toRun)
+                if(toRun.Length == 1)
                 {
-                    try
+                    Console.WriteLine($"Running {toRun[0].Name}...");
+                    Route result = toRun[0].Run();
+                    Console.WriteLine("Algorithm returned route:");
+                    result.Print();
+                }
+                else
+                {
+                    Console.WriteLine("Results:");
+                    Console.WriteLine("\tName\tBest\tAverage");
+
+                    foreach(Algorithm a in toRun)
                     {
-                        double[] result = RunTrials(a);
-                        Console.WriteLine("\t{0}\t{1:00.000}\t{2:00.000}", a.Name, result[0], result[1]);
-                    }
-                    catch(BadRouteException e)
-                    {
-                        Console.WriteLine(e.ToString());
-                        break;
+                        try
+                        {
+                            double[] result = RunTrials(a);
+                            Console.WriteLine("\t{0}\t{1:00.000}\t{2:00.000}", a.Name, result[0], result[1]);
+                        }
+                        catch(BadRouteException e)
+                        {
+                            Console.WriteLine(e.ToString());
+                            break;
+                        }
                     }
                 }
-                
+
                 return;
             }
 
