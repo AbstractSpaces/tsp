@@ -20,3 +20,4 @@ Alternatively a single algorithm can be run by supplying one of the following na
     random
     greedy
     mst
+    insert

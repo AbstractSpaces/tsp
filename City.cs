@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace TSP
 {
     // Contains essential information about cities along the route.
-    class City
+    class City : IEquatable<City>
     {
         // The number of cities being considered.
         public static int Count;
@@ -127,6 +127,19 @@ namespace TSP
             ID = i;
             Name = n;
             Edges = e.ToImmutableArray();
+        }
+
+        // Implemented so I can use the List.Remove() method on lists of Cities.
+        public bool Equals(City compare)
+        {
+            if(compare != null && compare.ID == ID)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

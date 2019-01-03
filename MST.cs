@@ -32,7 +32,7 @@ namespace TSP
         private void BuildTree()
         {
             // Select a random City to be the tree's root node.
-            City root = City.ListOf[new System.Random().Next(City.Count)];
+            City root = Program.RandomElement<City>(City.ListOf);
             Tree = new CityTree(root);
 
             List<City> onTree = new List<City>();

@@ -13,25 +13,25 @@ namespace TSP
         public readonly ImmutableArray<City> Order;
         // Summed distance of the route from start back to start.
         public readonly double Length;
+        // Number of Cities on the Route.
+        public readonly int Count;
 
         // Create a randomised Route.
         public Route()
         {
-            // Get a list of City ids.
-            List<int> id = new List<int>(Enumerable.Range(0, City.Count));
+            List<City> toAdd = new List<City>(City.ListOf);
+            List<City> order = new List<City>();
 
-            List<City> o = new List<City>();
-            System.Random rand = new System.Random();
-
-            while(id.Count > 0)
+            while(toAdd.Count > 0)
             {
-                int i = rand.Next(id.Count);
-                o.Add(City.ListOf[id[i]]);
-                id.RemoveAt(i);
+                City next = Program.RandomElement(toAdd);
+                order.Add(next);
+                toAdd.Remove(next);
             }
 
-            Order = o.ToImmutableArray();
+            Order = order.ToImmutableArray();
             Length = CalcLength();
+            Count = Order.Count();
         }
 
         // Create a Route using a specified order.
@@ -39,6 +39,7 @@ namespace TSP
         {
             Order = o.ToImmutableArray();
             Length = CalcLength();
+            Count = Order.Count();
         }
 
         // Create a Route by adding a City to an existing route, at the specified position.
