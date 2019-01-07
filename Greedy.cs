@@ -4,12 +4,12 @@ namespace TSP
 {
     // This algorithms starts with a random Route, and repeatedly performs the swap that reduces Route length the most.
     // It treats the problem as a graph search where nodes are neighboured by routes differing by one swap.
-    // It also happens to be an implementation of the 2-opt algorithm, but "2-opt" isn't a legal identifier so I'm staying with the name Greedy.
-    class Greedy : Algorithm
+    // It also happens to be an implementation of the 2-opt algorithm, but "2-opt" isn't a legal identifier.
+    class HillClimb : Algorithm
     {
         private Route Current;
 
-        public Greedy() : base("Greedy")
+        public HillClimb() : base("Hill Climb")
         { }
 
         override public void Reset()

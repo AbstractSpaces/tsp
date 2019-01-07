@@ -18,6 +18,6 @@ The \[ALGORITHM\] argument is optional. If not given, the program will output a 
 Alternatively a single algorithm can be run by supplying one of the following names:
 
     random
-    greedy
+    hillclimb
     mst
     insert

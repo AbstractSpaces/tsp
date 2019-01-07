@@ -50,7 +50,7 @@ namespace TSP
                 return new Algorithm []
                 {
                     new Random(),
-                    new Greedy(),
+                    new HillClimb(),
                     new MST(),
                     new Insert()
                 };
@@ -59,9 +59,9 @@ namespace TSP
             {
                 return new Algorithm [] { new Random() };
             }
-            else if(choice == "greedy")
+            else if(choice == "hillclimb")
             {
-                return new Algorithm [] { new Greedy() };
+                return new Algorithm [] { new HillClimb() };
             }
             else if(choice == "mst")
             {
